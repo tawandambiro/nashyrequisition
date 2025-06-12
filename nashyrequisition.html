@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Requisition Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { border-bottom: 2px solid #444; padding-bottom: 5px; display: flex; align-items: center; gap: 15px; }
+    /* Removed img styling as no image now */
+    .company-name {
+      font-weight: bold;
+      font-size: 1.4em;
+      color: #222;
+    }
+    .section { margin-bottom: 30px; }
+    label { display: block; margin-top: 10px; }
+    input, select, textarea {
+      width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<h2>
+  <span class="company-name">NASHY MINING COMPONENTS</span>
+  Requisition Form
+</h2>
+
+<div class="section">
+  <h3>Requisitioner Information</h3>
+  <label>Date <input type="date" /></label>
+  <label>Name <input type="text" /></label>
+  <label>Department 
+    <select>
+      <option>-- Select Department --</option>
+      <option>Finance</option>
+      <option>Procurement</option>
+      <option>Operations</option>
+    </select>
+  </label>
+  <label>Phone <input type="text" /></label>
+  <label>Delivery Location <input type="text" /></label>
+  <label>Cost Center <input type="text" /></label>
+  <label>Urgency Level
+    <select>
+      <option>-- Select Urgency Level --</option>
+      <option>Critical (Same Day) - Must be fulfilled immediately</option>
+      <option>High (1–2 Days) - Needs quick action</option>
+      <option>Medium (3–5 Days) - Standard requisitions</option>
+      <option>Low (1+ Week) - Non-urgent</option>
+    </select>
+  </label>
+</div>
+
+<div class="section">
+  <h3>Items Description</h3>
+  <table id="materialsTable">
+    <thead>
+      <tr>
+        <th>Item Description</th>
+        <th>Quantity</th>
+        <th>Cost Per Unit ($)</th>
+        <th>Total ($)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" placeholder="Item and Description" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="text" readonly /></td>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="Item and Description" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="text" readonly /></td>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="Item and Description" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="text" readonly /></td>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="Item and Description" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="text" readonly /></td>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="Item and Description" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="number" oninput="calculateRow(this)" /></td>
+        <td><input type="text" readonly /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Justification for Request</h3>
+  <label>Please provide a reason for this requisition:</label>
+  <textarea rows="4" placeholder="Enter justification here..."></textarea>
+</div>
+
+<button onclick="submitForm()">Submit</button>
+
+<script>
+  function calculateRow(input) {
+    const row = input.closest('tr');
+    const qty = parseFloat(row.cells[1].querySelector('input').value) || 0;
+    const cost = parseFloat(row.cells[2].querySelector('input').value) || 0;
+    row.cells[3].querySelector('input').value = (qty * cost).toFixed(2);
+  }
+
+  function submitForm() {
+    alert('Form submitted! (You can later send data to Google Sheets or email)');
+  }
+</script>
+
+</body>
+</html>
